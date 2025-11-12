@@ -1,0 +1,24 @@
+# Core dependencies for Language as Data Assignment 1
+
+# Data processing
+pandas>=1.5.0
+numpy>=1.23.0
+
+# NLP libraries
+spacy>=3.5.0
+tokenizers>=0.13.0
+
+# Visualization
+matplotlib>=3.6.0
+seaborn>=0.12.0
+
+# Additional utilities
+tqdm>=4.65.0
+
+# SpaCy models (install separately):
+# python -m spacy download de_core_news_sm
+# python -m spacy download de_core_news_md  # (optional, better accuracy)
+# python -m spacy download de_core_news_lg  # (optional, best accuracy)
+
+# Note: For Hindi, SpaCy doesn't have a pre-trained model
+# You may need to use alternative parsers or train your own
