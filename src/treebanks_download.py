@@ -6,8 +6,8 @@ def download_ud_treebank(repo_name, lang_code, save_dir="data/ud"):
     """
     Download UD treebank files from GitHub
     
-    repo_name: e.g., 'UD_German-GSD', 'UD_Hindi-HDTB'
-    lang_code: e.g., 'de_gsd', 'hi_hdtb'
+    repo_name: e.g., 'UD_Finnish-TDT', 'UD_Hindi-HDTB'
+    lang_code: e.g., 'fi_tdt', 'hi_hdtb'
     """
     base_url = f"https://raw.githubusercontent.com/UniversalDependencies/{repo_name}/master/"
     
@@ -50,11 +50,12 @@ def download_ud_treebank(repo_name, lang_code, save_dir="data/ud"):
     
     return treebank_dir, downloaded_files
 
-# Download German GSD
+# Download Finnish TDT
 print("=" * 60)
-print("Downloading German GSD Treebank")
+# print("Downloading German GSD Treebank")
+print("Downloading Finnish TDT Treebank")
 print("=" * 60)
-german_dir, german_files = download_ud_treebank("UD_German-GSD", "de_gsd")
+finnish_dir, finnish_files = download_ud_treebank("UD_Finnish-TDT", "fi_tdt")
 
 print("\n" + "=" * 60)
 print("Downloading Hindi HDTB Treebank")
@@ -65,7 +66,7 @@ hindi_dir, hindi_files = download_ud_treebank("UD_Hindi-HDTB", "hi_hdtb")
 print("\n" + "=" * 60)
 print("Download Summary")
 print("=" * 60)
-print(f"German files: {len(german_files)}/3")
+print(f"Finnish files: {len(finnish_files)}/3")
 print(f"Hindi files: {len(hindi_files)}/3")
 
 # Count sentences if files were downloaded
@@ -81,9 +82,9 @@ def count_sentences_in_conllu(filepath):
                 sentence_count += 1
     return sentence_count
 
-if german_files:
-    print("\nGerman GSD sentence counts:")
-    for filepath in german_files:
+if finnish_files:
+    print("\nFinnish TDT sentence counts:")
+    for filepath in finnish_files:
         count = count_sentences_in_conllu(filepath)
         print(f"  {filepath.name}: {count} sentences")
 
