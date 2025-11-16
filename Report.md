@@ -1025,166 +1025,44 @@ puistossa  NOUN   puraisee  obl
 
 ## Part C: Reflection
 
-### Group Process
-
-**Approach:**
-
-Our group divided work across the three major deliverables while maintaining collaborative oversight:
-
-1. **Language characteristics (Deliverable 1):** Each member researched one language, then cross-reviewed for consistency and completeness
-
-2. **Corpus datasheets (Deliverable 2):** We jointly identified the 10 most critical questions for our corpora, then divided question-answering responsibilities
-
-3. **Corpus statistics (Deliverable 3):** Collaborative coding with pair programming for data processing scripts, visualization review together
-
-4. **Tokenizer analysis (Deliverable 4):** Individual implementation of BPE training, joint analysis of segmentation patterns
-
-5. **Dependency parsing (Deliverable 5):** Individual parser execution, collaborative interpretation of results
-
-6. **Report writing:** Drafted sections individually, then extensively edited together for coherence
-
-**Tools and workflow:**
-- Version control with Git for code sharing
-- Shared document editing for report writing
-- Regular video meetings for discussion and coordination
-- Code review process before finalizing scripts
-
 ### Challenges Encountered
 
-**Technical challenges:**
+The main challenges we faced were:
 
-1. **Hindi corpus quality:** The 0% hapax legomena in Hindi was unexpected and raised questions about corpus preprocessing. We couldn't determine if this reflected actual data or a collection artifact without access to raw data.
-
-2. **SpaCy model limitations:** No pre-trained Hindi parser meant we could only perform Finnish dependency analysis, limiting comparative insights.
-
-3. **Tokenization evaluation:** Difficult to systematically evaluate BPE segmentation quality without gold-standard morphological annotations. We relied on manual inspection of examples.
-
-4. **Character encoding:** Hindi Devanagari required careful handling to avoid corruption; several early iterations had encoding errors.
-
-5. **Computational resources:** Training tokenizers and parsing thousands of sentences took longer than anticipated, requiring time management adjustments.
-
-**Conceptual challenges:**
-
-1. **Type-token ratio interpretation:** Understanding whether TTR differences reflected language structure vs. corpus characteristics required careful analysis of multiple factors.
-
-2. **Morphological expectations:** Determining "correct" BPE segmentation when linguistic and statistical principles conflict.
-
-3. **Dependency relation ambiguity:** Finnish's flexible word order makes many attachments genuinely ambiguous; difficult to assess parser "correctness."
-
-4. **Cross-linguistic comparison:** Ensuring fair comparison between languages with fundamentally different structures (agglutinative vs. moderately synthetic).
-
-**Documentation challenges:**
-
-1. **Corpus metadata:** Leipzig Corpora Collection provides minimal metadata, making certain datasheet questions impossible to answer definitively.
-
-2. **Methodology reconstruction:** Had to infer aspects of corpus construction from papers and documentation.
-
-3. **Source quality:** Finding authoritative references for language characteristics required extensive searching.
+- **Hindi corpus anomaly:** The 0% hapax legomena in Hindi was unexpected and we couldn't determine if this was due to preprocessing or actual data characteristics
+- **Limited parser availability:** No pre-trained Hindi dependency parser available in SpaCy, limiting our comparative syntactic analysis
+- **BPE evaluation:** Difficult to evaluate tokenization quality without gold-standard morphological annotations
+- **Character encoding:** Managing Hindi Devanagari script required careful attention to avoid corruption
+- **Corpus metadata:** Leipzig Corpora Collection provides minimal metadata, making some datasheet questions impossible to answer definitively
 
 ### Surprises
 
-**Positive surprises:**
+What surprised us most:
 
-1. **BPE effectiveness:** Despite being purely statistical, BPE often segmented Finnish morphology reasonably well, especially for case markers.
-
-2. **Hindi tokenization simplicity:** Hindi's analytic tendencies made BPE tokenization surprisingly effective with minimal sub-word splitting.
-
-3. **Zipf's law universality:** Both languages followed Zipf's law remarkably closely despite vastly different morphological systems.
-
-4. **Parser performance:** SpaCy's Finnish parser achieved reasonable accuracy (74.56% UAS) despite the language's complexity.
-
-5. **Resource availability:** Universal Dependencies and Leipzig Corpora Collection provided excellent free resources for under-studied languages.
-
-**Negative surprises:**
-
-1. **Corpus limitations:** News-only corpora miss significant linguistic variation (conversation, literature, social media).
-
-2. **Metadata poverty:** Lack of source, temporal, and demographic metadata severely limits certain analyses.
-
-3. **Hindi hapax anomaly:** Zero hapax legomena suggests significant corpus preprocessing we couldn't access.
-
-4. **Morphological inconsistency:** BPE segmentation inconsistently handles the same morphological patterns based on frequency.
-
-5. **Ambiguity extent:** Finnish's flexible word order creates more genuine ambiguity than we initially anticipated.
+- **BPE effectiveness:** Despite being purely statistical, BPE segmented Finnish case markers reasonably well
+- **Type-token ratio difference:** The dramatic 26× difference between Finnish and Hindi TTR vividly illustrated morphological complexity differences
+- **Zipf's law universality:** Both languages followed Zipf's law closely despite very different structures
+- **News corpus limitations:** Realized how much linguistic variation (conversation, literature, social media) is missing from news-only corpora
 
 ### Most Interesting Findings
 
-**Language-specific insights:**
+The most interesting aspects were:
 
-1. **Finnish's morphological richness:** The 26× higher type-token ratio vividly demonstrates how agglutinative morphology creates lexical diversity.
-
-2. **Hindi's postpositional system:** Seeing high-frequency postpositions (के, में, को) dominate the frequency list illustrated how analytic languages distribute grammatical information.
-
-3. **Word length distribution:** Finnish's broad distribution with long tail vs. Hindi's tight distribution reflected fundamental typological differences.
-
-4. **Case-driven parsing:** Finnish parser's consistent use of case marking for attachment decisions shows how morphology guides syntax.
-
-**Methodological insights:**
-
-1. **Statistical vs. linguistic segmentation:** BPE's purely statistical approach produces reasonable but linguistically imperfect segmentations—valuable lesson in NLP trade-offs.
-
-2. **Corpus biases:** Understanding how genre (news), source selection (RSS feeds), and temporal scope (2022) introduce systematic biases.
-
-3. **Evaluation complexity:** Difficulty assessing parser "correctness" in ambiguous cases highlighted fundamental challenges in NLP evaluation.
-
-4. **Cross-linguistic comparison challenges:** Fair comparison requires careful attention to corpus size, domain, and preprocessing differences.
-
-**Theoretical insights:**
-
-1. **Morphology-syntax interaction:** How Finnish's rich morphology correlates with specific syntactic patterns (frequent obliques, adverbials).
-
-2. **Universal patterns:** Despite different structures, both languages follow Zipf's law and show similar sentence complexity variation.
-
-3. **Tokenization impact:** Sub-word tokenization's language-dependent effectiveness suggests one-size-fits-all approaches may not be optimal.
-
-4. **Data quality importance:** Corpus quality and documentation directly impact analysis depth and reliability.
-
-### What We Learned
-
-**Technical skills:**
-- Corpus processing and statistical analysis
-- BPE tokenizer training and evaluation
-- Dependency parser usage and interpretation
-- Cross-linguistic data comparison methods
-- Data visualization for linguistic patterns
-
-**Linguistic knowledge:**
-- Deep understanding of Finnish and Hindi typology
-- Morphological variation across language families
-- Syntactic structure differences
-- Case systems and their computational implications
-
-**Research practices:**
-- Importance of corpus documentation
-- Critical evaluation of data sources
-- Systematic comparison methodology
-- Interpretation of statistical patterns
-
-**NLP insights:**
-- Trade-offs between statistical and linguistic approaches
-- Language-specific challenges in NLP
-- Evaluation metric interpretation
-- Resource limitations for less-studied languages
+- **Morphological impact on statistics:** Finnish's agglutinative morphology creates dramatically higher lexical diversity and longer words
+- **Hindi's postpositional dominance:** High-frequency postpositions (के, में, को) in the top-20 list clearly showed how analytic languages distribute grammatical information
+- **Case-driven parsing:** The Finnish parser consistently used case marking for attachment decisions, showing morphology-syntax interaction
+- **Statistical vs. linguistic segmentation:** BPE's purely frequency-based approach produces reasonable but linguistically imperfect results
 
 ### Time Distribution
 
-**Estimated hours per group member:**
-
-- Language characteristics research: 3 hours
-- Corpus datasheet completion: 2 hours
-- Corpus statistics implementation: 5 hours
+Each group member spent approximately 20-22 hours total:
+- Language research and corpus datasheet: 5 hours
+- Corpus statistics implementation: 5 hours  
 - Tokenizer training and analysis: 4 hours
-- Dependency parsing and evaluation: 3 hours
-- Report writing and editing: 5 hours
-- **Total:** ~22 hours per member
+- Dependency parsing: 3 hours
+- Report writing: 4 hours
 
-**Time breakdown by challenge:**
-- Technical implementation: 40%
-- Research and documentation: 30%
-- Analysis and interpretation: 20%
-- Report writing: 10%
-
-We stayed within the 23-hour guideline while completing all deliverables.
+We stayed within the 23-hour guideline.
 
 ---
 
