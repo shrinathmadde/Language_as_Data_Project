@@ -1,204 +1,207 @@
-# Deliverable 3: Corpus Statistics Analysis
+(venv) shrinath@dellpro:~/ShriCode/Langugae-as-Data/src$ python deliverable_3_corpus_statistics.py
 
-## Overview
-A comprehensive comparative analysis of word distributions and linguistic statistics between German and Hindi corpora. This script analyzes both word frequency lists and Universal Dependencies (UD) treebank data to extract meaningful patterns and differences between the two languages.
+Loading Finnish corpus from ../data/corpo/wordlist_fin_news_2012_300K_20251115235448.csv...
+Loaded 394130 unique word forms
+Loading sentences from ../data/ud/UD_Finnish-TDT/fi_tdt-ud-train.conllu...
+Loaded 12217 sentences with 162815 tokens
 
-## Purpose
-- Compare statistical properties of German and Hindi corpora
-- Analyze word frequency distributions (Zipf's law)
-- Examine sentence and word length distributions
-- Study n-gram patterns (bigrams and trigrams)
-- Analyze closed word classes (e.g., conjunctions)
-- Generate comparative visualizations
+Loading Hindi corpus from ../data/corpo/wordlist_hin_news_2019_20251112220411.csv...
+Loaded 39213 unique word forms
+Loading sentences from ../data/ud/UD_Hindi-HDTB/hi_hdtb-ud-train.conllu...
+Loaded 13306 sentences with 281057 tokens
 
-## Requirements
-```bash
-pip install pandas numpy matplotlib seaborn
-```
-
-## Input Data Required
-
-### 1. Word Frequency Lists (CSV format)
-- **German**: `data/corpo/wordlist_deu_news_2008_10K_20251112220311.csv`
-- **Hindi**: `data/corpo/wordlist_hin_news_2019_20251112220411.csv`
-
-Format: CSV files with columns `Item` (word) and `Frequency` (count)
-
-### 2. Universal Dependencies CoNLL-U Files
-- **German**: `data/ud/UD_German-GSD/de_gsd-ud-train.conllu`
-- **Hindi**: `data/ud/UD_Hindi-HDTB/hi_hdtb-ud-train.conllu`
-
-## Usage
-
-### Basic Execution
-```bash
-python deliverable_3_corpus_statistics.py
-```
-
-### Customization
-Edit the file paths in the `main()` function (lines 242-246):
-```python
-german_corpus = "path/to/german/wordlist.csv"
-hindi_corpus = "path/to/hindi/wordlist.csv"
-german_ud = "path/to/german/treebank.conllu"
-hindi_ud = "path/to/hindi/treebank.conllu"
-```
-
-## Core Components
-
-### Class: `CorpusAnalyzer`
-Main class for analyzing corpus statistics.
-
-**Key Methods:**
-- `load_wordlist()` - Load word frequency data from CSV
-- `load_ud_sentences()` - Extract sentences from CoNLL-U files
-- `basic_statistics()` - Calculate core corpus metrics
-- `most_frequent_words(n)` - Get top N frequent words
-- `zipf_analysis()` - Analyze frequency-rank distribution
-- `ngram_analysis(n, top_k)` - Extract and count n-grams
-- `closed_class_analysis(word_list)` - Analyze specific word frequencies
-
-### Function: `compare_corpora(analyzer1, analyzer2)`
-Generate comparative visualizations between two languages.
-
-## Statistics Computed
-
-### Basic Statistics
-- **Number of types** (unique words)
-- **Number of tokens** (total words)
-- **Type-token ratio** (lexical diversity)
-- **Hapax legomena** (words appearing once)
-- **Hapax percentage**
-
-### Sentence Statistics (from UD data)
-- Number of sentences
-- Average sentence length (words and characters)
-- Standard deviation of sentence length
-- 10th and 90th percentile sentence lengths
-
-### Word Statistics (from UD data)
-- Average word length
-- Standard deviation of word length
-- 10th and 90th percentile word lengths
-
-### N-gram Analysis
-- Top 15 bigrams (2-word sequences)
-- Top 10 trigrams (3-word sequences)
-- Frequency counts for each n-gram
-
-### Closed Word Class Analysis
-- Frequency and relative frequency of specific words
-- Example conjunctions:
-  - German: und, oder, aber, denn, sondern
-  - Hindi: और, या, लेकिन, परन्तु, किन्तु
-
-## Output
-
-### Console Output
-The script prints detailed statistics including:
-- Basic corpus statistics for both languages
-- Type-token ratio comparison
-- Top 20 most frequent words
-- Top 15 bigrams
-- Top 10 trigrams
-- Conjunction frequency analysis
-
-### Visualizations
-
-#### 1. `comparison_zipf_and_frequency.png`
-Two-panel figure:
-- **Left panel**: Zipf's law plot (frequency vs rank on log-log scale)
-- **Right panel**: Bar chart comparing top 15 most frequent words
-
-#### 2. `comparison_word_length_distribution.png`
-Histogram comparing word length distributions between German and Hindi
-
-#### 3. `comparison_sentence_length_distribution.png`
-Histogram comparing sentence length distributions (in words)
-
-## Example Output
-```
-============================================================
-Statistics for German Corpus
-============================================================
-num_types................................... 10,000
-num_tokens.................................. 1,234,567
-type_token_ratio............................ 0.008100
-hapax_legomena.............................. 3,456
-hapax_percentage............................ 34.56
-num_sentences............................... 13,814
-avg_sentence_length_words................... 15.23
-avg_word_length............................. 5.67
+================================================================================
+BASIC STATISTICS
+================================================================================
 
 ============================================================
+Statistics for Finnish Corpus
+============================================================
+num_types............................... 394,130
+num_tokens.............................. 3,784,991
+type_token_ratio........................ 0.10
+hapax_legomena.......................... 239,826
+hapax_percentage........................ 60.85
+num_sentences........................... 12,217
+avg_sentence_length_words............... 13.33
+std_sentence_length_words............... 9.49
+p10_sentence_length_words............... 5.00
+p90_sentence_length_words............... 23.00
+avg_sentence_length_chars............... 86.42
+std_sentence_length_chars............... 66.35
+avg_word_length......................... 6.48
+std_word_length......................... 4.29
+p10_word_length......................... 1.00
+p90_word_length......................... 12.00
+
+============================================================
+Statistics for Hindi Corpus
+============================================================
+num_types............................... 39,213
+num_tokens.............................. 10,584,904
+type_token_ratio........................ 0.00
+hapax_legomena.......................... 0
+hapax_percentage........................ 0.00
+num_sentences........................... 13,306
+avg_sentence_length_words............... 21.12
+std_sentence_length_words............... 9.50
+p10_sentence_length_words............... 11.00
+p90_sentence_length_words............... 34.00
+avg_sentence_length_chars............... 80.91
+std_sentence_length_chars............... 39.10
+avg_word_length......................... 3.83
+std_word_length......................... 2.16
+p10_word_length......................... 2.00
+p90_word_length......................... 7.00
+
+================================================================================
 TYPE-TOKEN RATIO COMPARISON
-============================================================
-German TTR: 0.008100
-Hindi TTR:  0.012345
-Difference: 0.004245
+================================================================================
+Finnish TTR: 0.104130
+Hindi TTR:   0.003705
+Difference:  0.100425
 
-============================================================
+================================================================================
 TOP 20 MOST FREQUENT WORDS
-============================================================
+================================================================================
 
-German:
- 1. die               123,456
- 2. der               98,765
- 3. und               87,654
-...
-```
+Finnish:
+ 1. .                  283,489
+ 2. ,                  162,767
+ 3. on                  93,207
+ 4. ja                  85,619
+ 5. että                29,424
+ 6. ei                  28,556
+ 7. oli                 19,784
+ 8. mukaan              19,399
+ 9. myös                17,136
+10. ovat                16,079
+11. mutta               14,170
+12. "                   13,484
+13. se                  12,490
+14. ole                 11,939
+15. kun                 11,440
+16. hän                 10,016
+17. jo                   9,036
+18. sen                  8,261
+19. kuin                 8,211
+20. viime                8,092
 
-## Key Insights
+Hindi:
+ 1. के                 417,400
+ 2. .                  375,142
+ 3. में                324,300
+ 4. की                 253,645
+ 5. है                 240,716
+ 6. को                 201,336
+ 7. से                 175,324
+ 8. ,                  172,730
+ 9. ने                 172,108
+10. और                 157,998
+11. का                 134,690
+12. कि                 129,153
+13. पर                 123,094
+14. हैं                100,098
+15. भी                  86,699
+16. इस                  70,020
+17. नहीं                69,110
+18. कहा                 60,837
+19. एक                  60,825
+20. लिए                 59,327
 
-### Zipf's Law
-The script validates Zipf's law, which states that the frequency of a word is inversely proportional to its rank. The log-log plot typically shows a linear relationship.
+================================================================================
+BIGRAM ANALYSIS
+================================================================================
 
-### Type-Token Ratio (TTR)
-- **Lower TTR**: More repetitive text, less lexical diversity
-- **Higher TTR**: More varied vocabulary
-- Useful for comparing morphological complexity between languages
+Finnish - Top 15 Bigrams:
+ 1. , että                           1,076
+ 2. , mutta                            435
+ 3. , ja                               434
+ 4. , joka                             335
+ 5. ei ole                             224
+ 6. , kun                              201
+ 7. , jotka                            192
+ 8. , jonka                            160
+ 9. , jossa                            156
+10. , jos                              137
+11. , sillä                            119
+12. siitä ,                            113
+13. se on                              105
+14. että ei                             98
+15. , koska                             94
 
-### Morphological Complexity
-Languages with richer morphology (like Hindi) typically show:
-- Higher type-token ratios
-- More hapax legomena
-- Longer average word lengths
+Hindi - Top 15 Bigrams:
+ 1. है ।                             4,283
+ 2. कहा कि                           1,713
+ 3. के लिए                           1,639
+ 4. हैं ।                            1,450
+ 5. है कि                            1,272
+ 6. ने कहा                             913
+ 7. उन्होंने कहा                       636
+ 8. के बाद                             597
+ 9. था ।                               589
+10. गया है                             555
+11. के साथ                             531
+12. बताया कि                           467
+13. थी ।                               397
+14. रहा है                             387
+15. थे ।                               385
 
-## Code Structure
+================================================================================
+TRIGRAM ANALYSIS
+================================================================================
 
-**Lines 19-163**: `CorpusAnalyzer` class definition
-**Lines 165-237**: `compare_corpora()` function for visualizations
-**Lines 239-349**: `main()` function orchestrating the analysis
+Finnish - Top 10 Trigrams:
+ 1. , että ei                                     74
+ 2. siitä , että                                  61
+ 3. , joka on                                     55
+ 4. ( EY )                                        55
+ 5. EY ) N:o                                      55
+ 6. Arvoisa puhemies ,                            44
+ 7. se , että                                     41
+ 8. , ottaa huomioon                              27
+ 9. , joka oli                                    26
+10. sitä , että                                   26
 
-## Customization Options
+Hindi - Top 10 Trigrams:
+ 1. ने कहा कि                                    779
+ 2. उन्होंने कहा कि                              597
+ 3. गया है ।                                     377
+ 4. रहा है ।                                     273
+ 5. ने बताया कि                                  272
+ 6. नहीं है ।                                    243
+ 7. रहे हैं ।                                    222
+ 8. के बारे में                                  221
+ 9. कहना है कि                                   212
+10. रही है ।                                     212
 
-### Analyze Different Conjunctions
-Modify lines 326-327 and 329-330:
-```python
-german_conjunctions = ['your', 'words', 'here']
-hindi_conjunctions = ['आपके', 'शब्द', 'यहाँ']
-```
+================================================================================
+CLOSED WORD CLASS ANALYSIS: CONJUNCTIONS
+================================================================================
 
-### Change N-gram Size
-Modify the `ngram_analysis()` calls:
-```python
-# For 4-grams instead of trigrams
-german_4grams = german.ngram_analysis(n=4, top_k=10)
-```
+Finnish Conjunctions:
+  ja             :     85,619 (2.2621%)
+  tai            :      6,462 (0.1707%)
+  mutta          :     14,170 (0.3744%)
+  että           :     29,424 (0.7774%)
+  kun            :     11,440 (0.3022%)
 
-### Adjust Visualization Settings
-Modify lines 14-16 for plot styling:
-```python
-sns.set_style("darkgrid")  # Different style
-plt.rcParams['figure.figsize'] = (16, 8)  # Larger figures
-```
+Hindi Conjunctions:
+  और             :    157,998 (1.4927%)
+  या             :     10,762 (0.1017%)
+  लेकिन          :     27,861 (0.2632%)
+  परन्तु         :         54 (0.0005%)
+  किन्तु         :         18 (0.0002%)
 
-## Performance Notes
-- Processing time depends on corpus size
-- Large corpora may take several minutes to analyze
-- Visualizations are saved at 300 DPI for publication quality
+================================================================================
+GENERATING VISUALIZATIONS
+================================================================================
 
-## Related Scripts
-- **Prerequisite**: Run `treebanks_download.py` to get UD data
-- **Next**: `deliverable_4_tokenizer_analysis.py` for morphological analysis
-- **Next**: `deliverable_5_dependency_parsing.py` for syntactic analysis
+Saved: comparison_zipf_and_frequency.png
+Saved: comparison_word_length_distribution.png
+Saved: comparison_sentence_length_distribution.png
+
+================================================================================
+ANALYSIS COMPLETE!
+================================================================================
+(venv) shrinath@dellpro:~/ShriCode/Langugae-as-Data/src$

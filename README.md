@@ -10,8 +10,8 @@ source venv/bin/activate
 # Install dependencies
 pip install -r requirements.txt
 
-# Install SpaCy German model
-python -m spacy download de_core_news_md
+# Install SpaCy Finnish model
+python -m spacy download fi_core_news_sm
 ```
 
 ## Run Scripts

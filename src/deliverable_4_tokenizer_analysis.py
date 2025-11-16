@@ -1,6 +1,6 @@
 """
 Deliverable 4: Morphological Analysis using Sub-word Tokenizers
-Train and analyze Unigram or BPE tokenizers for German and Hindi
+Train and analyze Unigram or BPE tokenizers for Finnish and Hindi
 """
 
 import os
@@ -252,12 +252,12 @@ class TokenizerAnalyzer:
 
         if examples is None:
             # Use default examples based on language
-            if self.language == "German":
+            if self.language == "Finnish":
                 examples = {
-                    'Plurals (-en, -e, -er)': ['Hund', 'Hunde', 'Hunden', 'Kind', 'Kinder', 'Kindern'],
-                    'Past participle (ge-...-t)': ['machen', 'gemacht', 'lernen', 'gelernt', 'spielen', 'gespielt'],
-                    'Compounds': ['Haustür', 'Haus', 'Tür', 'Kindergarten', 'Kinder', 'Garten'],
-                    'Diminutive (-chen)': ['Haus', 'Häuschen', 'Buch', 'Büchlein'],
+                    'Plurals (-t)': ['talo', 'talot', 'kissa', 'kissat', 'koira', 'koirat'],
+                    'Case markers': ['talo', 'talossa', 'talosta', 'taloon', 'talon'],
+                    'Possessive suffixes': ['talo', 'taloni', 'talosi', 'talonsa'],
+                    'Compounds': ['kirjasto', 'kirja', 'talo', 'kahvikuppi', 'kahvi', 'kuppi'],
                 }
             elif self.language == "Hindi":
                 examples = {
@@ -281,11 +281,11 @@ class TokenizerAnalyzer:
         print(f"{'='*60}")
 
         # Find words with common affixes in training data
-        if self.language == "German":
-            # Check plural -en consistency
-            en_words = [w for w in self.train_words if w.endswith('en') and len(w) > 4][:10]
-            print("\nWords ending in '-en' (potential plurals):")
-            for word in en_words:
+        if self.language == "Finnish":
+            # Check plural -t consistency
+            t_words = [w for w in self.train_words if w.endswith('t') and len(w) > 4][:10]
+            print("\nWords ending in '-t' (potential plurals):")
+            for word in t_words:
                 encoding = self.tokenizer.encode(word)
                 tokens = encoding.tokens
                 print(f"  {word:20s} → {' | '.join(tokens)}")
@@ -327,45 +327,45 @@ def main():
     print("="*80)
 
     # Define paths
-    german_train = "data/ud/UD_German-GSD/de_gsd-ud-train.conllu"
-    german_test = "data/ud/UD_German-GSD/de_gsd-ud-test.conllu"
-    hindi_train = "data/ud/UD_Hindi-HDTB/hi_hdtb-ud-train.conllu"
-    hindi_test = "data/ud/UD_Hindi-HDTB/hi_hdtb-ud-test.conllu"
+    finnish_train = "../data/ud/UD_Finnish-TDT/fi_tdt-ud-train.conllu"
+    finnish_test = "../data/ud/UD_Finnish-TDT/fi_tdt-ud-test.conllu"
+    hindi_train = "../data/ud/UD_Hindi-HDTB/hi_hdtb-ud-train.conllu"
+    hindi_test = "../data/ud/UD_Hindi-HDTB/hi_hdtb-ud-test.conllu"
 
     # Choose tokenizer type: 'BPE' or 'Unigram'
     model_type = 'BPE'  # Change to 'Unigram' to try that model
     vocab_size = 5000
 
-    # ===== GERMAN ANALYSIS =====
+    # ===== FINNISH ANALYSIS =====
     print("\n" + "="*80)
-    print("GERMAN TOKENIZER")
+    print("FINNISH TOKENIZER")
     print("="*80)
 
-    german_analyzer = TokenizerAnalyzer(
-        language_name="German",
-        ud_train_file=german_train,
-        ud_test_file=german_test,
+    finnish_analyzer = TokenizerAnalyzer(
+        language_name="Finnish",
+        ud_train_file=finnish_train,
+        ud_test_file=finnish_test,
         vocab_size=vocab_size,
         model_type=model_type
     )
 
     # Load data
-    train_file, train_sentences = german_analyzer.load_conllu_data(german_train, is_train=True)
-    _, test_sentences = german_analyzer.load_conllu_data(german_test, is_train=False)
+    train_file, train_sentences = finnish_analyzer.load_conllu_data(finnish_train, is_train=True)
+    _, test_sentences = finnish_analyzer.load_conllu_data(finnish_test, is_train=False)
 
     # Create and train tokenizer
-    # For German, we'll use basic normalization but no accent stripping
-    german_analyzer.create_tokenizer(normalize=True, strip_accents=False, lowercase=False)
-    german_analyzer.train_tokenizer(train_file)
+    # For Finnish, we'll use basic normalization but no accent stripping
+    finnish_analyzer.create_tokenizer(normalize=True, strip_accents=False, lowercase=False)
+    finnish_analyzer.train_tokenizer(train_file)
 
     # Analyze tokenization
-    german_stats, german_token_freq = german_analyzer.analyze_tokenization(test_sentences)
+    finnish_stats, finnish_token_freq = finnish_analyzer.analyze_tokenization(test_sentences)
 
     # Morphological analysis
-    german_analyzer.analyze_morphology()
+    finnish_analyzer.analyze_morphology()
 
     # Visualize
-    german_analyzer.visualize_token_distribution(german_token_freq)
+    finnish_analyzer.visualize_token_distribution(finnish_token_freq)
 
     # Clean up temp file
     if os.path.exists(train_file):
@@ -410,9 +410,9 @@ def main():
     print("ANALYSIS COMPLETE!")
     print("="*80)
     print("\nGenerated files:")
-    print(f"  - tokenizer_German_{model_type}.json")
+    print(f"  - tokenizer_Finnish_{model_type}.json")
     print(f"  - tokenizer_Hindi_{model_type}.json")
-    print(f"  - tokenizer_analysis_German_{model_type}.png")
+    print(f"  - tokenizer_analysis_Finnish_{model_type}.png")
     print(f"  - tokenizer_analysis_Hindi_{model_type}.png")
 
 

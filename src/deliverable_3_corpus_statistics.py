@@ -1,6 +1,6 @@
 """
 Deliverable 3: Corpus Statistics Analysis
-A comparative analysis of word distributions between German and Hindi corpora
+A comparative analysis of word distributions between Finnish and Hindi corpora
 """
 
 import pandas as pd
@@ -240,18 +240,18 @@ def main():
     """Main analysis pipeline"""
 
     # Define file paths
-    german_corpus = "data/corpo/wordlist_deu_news_2008_10K_20251112220311.csv"
-    hindi_corpus = "data/corpo/wordlist_hin_news_2019_20251112220411.csv"
-    german_ud = "data/ud/UD_German-GSD/de_gsd-ud-train.conllu"
-    hindi_ud = "data/ud/UD_Hindi-HDTB/hi_hdtb-ud-train.conllu"
+    finnish_corpus = "../data/corpo/wordlist_fin_news_2012_300K_20251115235448.csv"
+    hindi_corpus = "../data/corpo/wordlist_hin_news_2019_20251112220411.csv"
+    finnish_ud = "../data/ud/UD_Finnish-TDT/fi_tdt-ud-train.conllu"
+    hindi_ud = "../data/ud/UD_Hindi-HDTB/hi_hdtb-ud-train.conllu"
 
     # Create analyzers
-    german = CorpusAnalyzer(german_corpus, "German", german_ud)
+    finnish = CorpusAnalyzer(finnish_corpus, "Finnish", finnish_ud)
     hindi = CorpusAnalyzer(hindi_corpus, "Hindi", hindi_ud)
 
     # Load data
-    german.load_wordlist()
-    german.load_ud_sentences()
+    finnish.load_wordlist()
+    finnish.load_ud_sentences()
 
     hindi.load_wordlist()
     hindi.load_ud_sentences()
@@ -261,8 +261,8 @@ def main():
     print("BASIC STATISTICS")
     print("="*80)
 
-    german_stats = german.basic_statistics()
-    german.print_statistics(german_stats)
+    finnish_stats = finnish.basic_statistics()
+    finnish.print_statistics(finnish_stats)
 
     hindi_stats = hindi.basic_statistics()
     hindi.print_statistics(hindi_stats)
@@ -271,17 +271,17 @@ def main():
     print(f"\n{'='*80}")
     print("TYPE-TOKEN RATIO COMPARISON")
     print(f"{'='*80}")
-    print(f"German TTR: {german_stats['type_token_ratio']:.6f}")
-    print(f"Hindi TTR:  {hindi_stats['type_token_ratio']:.6f}")
-    print(f"Difference: {abs(german_stats['type_token_ratio'] - hindi_stats['type_token_ratio']):.6f}")
+    print(f"Finnish TTR: {finnish_stats['type_token_ratio']:.6f}")
+    print(f"Hindi TTR:   {hindi_stats['type_token_ratio']:.6f}")
+    print(f"Difference:  {abs(finnish_stats['type_token_ratio'] - hindi_stats['type_token_ratio']):.6f}")
 
     # Most frequent words
     print(f"\n{'='*80}")
     print("TOP 20 MOST FREQUENT WORDS")
     print(f"{'='*80}")
 
-    print(f"\n{german.language}:")
-    for i, (word, freq) in enumerate(german.most_frequent_words(20), 1):
+    print(f"\n{finnish.language}:")
+    for i, (word, freq) in enumerate(finnish.most_frequent_words(20), 1):
         print(f"{i:2d}. {word:15s} {freq:>10,}")
 
     print(f"\n{hindi.language}:")
@@ -293,9 +293,9 @@ def main():
     print("BIGRAM ANALYSIS")
     print(f"{'='*80}")
 
-    german_bigrams = german.ngram_analysis(n=2, top_k=15)
-    print(f"\n{german.language} - Top 15 Bigrams:")
-    for i, (bigram, count) in enumerate(german_bigrams, 1):
+    finnish_bigrams = finnish.ngram_analysis(n=2, top_k=15)
+    print(f"\n{finnish.language} - Top 15 Bigrams:")
+    for i, (bigram, count) in enumerate(finnish_bigrams, 1):
         print(f"{i:2d}. {' '.join(bigram):30s} {count:>7,}")
 
     hindi_bigrams = hindi.ngram_analysis(n=2, top_k=15)
@@ -308,9 +308,9 @@ def main():
     print("TRIGRAM ANALYSIS")
     print(f"{'='*80}")
 
-    german_trigrams = german.ngram_analysis(n=3, top_k=10)
-    print(f"\n{german.language} - Top 10 Trigrams:")
-    for i, (trigram, count) in enumerate(german_trigrams, 1):
+    finnish_trigrams = finnish.ngram_analysis(n=3, top_k=10)
+    print(f"\n{finnish.language} - Top 10 Trigrams:")
+    for i, (trigram, count) in enumerate(finnish_trigrams, 1):
         print(f"{i:2d}. {' '.join(trigram):40s} {count:>7,}")
 
     hindi_trigrams = hindi.ngram_analysis(n=3, top_k=10)
@@ -323,14 +323,14 @@ def main():
     print("CLOSED WORD CLASS ANALYSIS: CONJUNCTIONS")
     print(f"{'='*80}")
 
-    german_conjunctions = ['und', 'oder', 'aber', 'denn', 'sondern']
+    finnish_conjunctions = ['ja', 'tai', 'mutta', 'että', 'kun']
     hindi_conjunctions = ['और', 'या', 'लेकिन', 'परन्तु', 'किन्तु']
 
-    german_conj_freq = german.closed_class_analysis(german_conjunctions)
+    finnish_conj_freq = finnish.closed_class_analysis(finnish_conjunctions)
     hindi_conj_freq = hindi.closed_class_analysis(hindi_conjunctions)
 
-    print(f"\n{german.language} Conjunctions:")
-    for word, data in german_conj_freq.items():
+    print(f"\n{finnish.language} Conjunctions:")
+    for word, data in finnish_conj_freq.items():
         print(f"  {word:15s}: {data['frequency']:>10,} ({data['relative_frequency']:.4f}%)")
 
     print(f"\n{hindi.language} Conjunctions:")
@@ -341,7 +341,7 @@ def main():
     print(f"\n{'='*80}")
     print("GENERATING VISUALIZATIONS")
     print(f"{'='*80}")
-    compare_corpora(german, hindi)
+    compare_corpora(finnish, hindi)
 
     print(f"\n{'='*80}")
     print("ANALYSIS COMPLETE!")

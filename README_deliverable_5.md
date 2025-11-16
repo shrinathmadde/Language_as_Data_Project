@@ -1,384 +1,231 @@
-# Deliverable 5: Syntactic Analysis using Dependency Parsers
+(venv) shrinath@dellpro:~/ShriCode/Langugae-as-Data$ python src/deliverable_5_dependency_parsing.py
+================================================================================
+DELIVERABLE 5: DEPENDENCY PARSING AND SYNTACTIC ANALYSIS
+================================================================================
 
-## Overview
-Perform comprehensive syntactic analysis using SpaCy dependency parsers. This script analyzes dependency tree structures, computes tree statistics, evaluates parser accuracy against gold standard annotations, and explores syntactic patterns in German (and potentially other languages).
+================================================================================
+Finnish DEPENDENCY PARSING
+================================================================================
 
-## Purpose
-- Parse sentences using pre-trained SpaCy models
-- Compute dependency tree statistics (depth, node degree, etc.)
-- Analyze syntactic patterns by POS tags
-- Evaluate parser performance (UAS, LAS, Label Accuracy)
-- Visualize syntactic structures and distributions
-- Test parser behavior on ambiguous sentences
-
-## Requirements
-```bash
-pip install spacy numpy matplotlib seaborn
-
-# Download SpaCy models
-python -m spacy download de_core_news_sm  # German (small)
-# OR
-python -m spacy download de_core_news_md  # German (medium)
-# OR
-python -m spacy download de_core_news_lg  # German (large)
-```
-
-### Note on Hindi
-Standard SpaCy does not include pre-trained Hindi models. Options:
-1. Train a custom model using SpaCy
-2. Use alternative parsers (Stanza, Trankit, UDPipe)
-3. Focus on German for this deliverable (as currently configured)
-
-## Input Data Required
-
-### Universal Dependencies CoNLL-U Files
-- **German Test**: `data/ud/UD_German-GSD/de_gsd-ud-test.conllu`
-
-The CoNLL-U file provides gold standard annotations for evaluation.
-
-## Usage
-
-### Basic Execution
-```bash
-python deliverable_5_dependency_parsing.py
-```
-
-### Customization
-
-#### Choose SpaCy Model
-Edit line 509:
-```python
-german_model = "de_core_news_sm"  # or de_core_news_md, de_core_news_lg
-```
-
-Model comparison:
-- **sm (small)**: ~15MB, faster, lower accuracy
-- **md (medium)**: ~50MB, balanced
-- **lg (large)**: ~500MB, slower, higher accuracy
-
-#### Adjust Number of Sentences
-Edit line 523:
-```python
-german_analyzer.load_gold_conllu(max_sentences=500)  # Default: 500
-```
-
-#### Test Different Ambiguous Sentences
-Edit lines 544-548:
-```python
-ambiguous_sentences = [
-    "Your ambiguous sentence here.",
-    "Another test case.",
-]
-```
-
-## Core Components
-
-### Class: `DependencyAnalyzer`
-Main class for dependency parsing analysis.
-
-**Initialization Parameters:**
-- `language_name`: Language identifier (e.g., "German")
-- `model_name`: SpaCy model name (e.g., "de_core_news_sm")
-- `conllu_file`: Path to gold standard CoNLL-U file (optional)
-
-**Key Methods:**
-- `load_spacy_model()` - Load SpaCy parser model
-- `load_gold_conllu()` - Load gold standard dependency trees
-- `parse_sentences()` - Parse sentences using SpaCy
-- `compute_tree_statistics()` - Calculate tree metrics
-- `evaluate_parser()` - Compare against gold standard
-- `show_examples()` - Display example parses
-- `visualize_statistics()` - Create visualization plots
-
-## Analysis Features
-
-### 1. Tree Structure Statistics
-
-#### Tree Depth
-- Maximum distance from root to any leaf node
-- Indicates sentence complexity and embedding depth
-
-#### Node Degree
-- Number of children for each node
-- Distribution shows branching patterns
-
-#### Distance to Root
-- Path length from each token to sentence root
-- Analyzed separately for different POS tags
-- Shows syntactic centrality of word classes
-
-### 2. Syntactic Pattern Analysis
-
-#### Leaf Nodes
-- Tokens with no dependents (zero children)
-- Typically: nouns, adjectives, adverbs, punctuation
-
-#### Ancestor Analysis
-- Common parent POS tags for specific word types
-- Example: What do NOUNs typically depend on?
-
-#### Descendant Analysis
-- Common child POS tags for specific word types
-- Example: What typically depends on VERBs?
-
-#### Dependency Relations
-- Frequency of different dependency types
-- Common patterns: nsubj, obj, det, case, etc.
-
-### 3. Parser Evaluation Metrics
-
-#### UAS (Unlabeled Attachment Score)
-Percentage of tokens with correct head attachment (ignoring label).
-
-Formula: `correct_heads / total_tokens × 100`
-
-#### LAS (Labeled Attachment Score)
-Percentage of tokens with both correct head and correct dependency label.
-
-Formula: `correct_both / total_tokens × 100`
-
-#### Label Accuracy (LS)
-Percentage of tokens with correct dependency label (ignoring head).
-
-Formula: `correct_labels / total_tokens × 100`
-
-### 4. Ambiguity Testing
-The script tests parser behavior on structurally ambiguous sentences:
-- **PP Attachment**: "Ich sehe den Mann mit dem Fernrohr"
-  - Who has the telescope? The man or the speaker?
-- **Instrument Ambiguity**: "Die Polizei erschoss den Mann mit der Waffe"
-  - Who had the weapon?
-- **Locative Ambiguity**: "Der Hund beißt den Mann im Park"
-  - Who is in the park? Dog, man, or both?
-
-## Output
-
-### Console Output
-
-#### Model Loading
-```
-============================================================
-GERMAN DEPENDENCY PARSING
-============================================================
-
-Loading SpaCy model: de_core_news_sm
+Loading SpaCy model: fi_core_news_sm
 Model loaded successfully!
-Pipeline components: ['tok2vec', 'morphologizer', 'parser', 'lemmatizer', 'ner']
-```
+Pipeline components: ['tok2vec', 'tagger', 'morphologizer', 'parser', 'lemmatizer', 'attribute_ruler', 'ner']
 
-#### Gold Standard Loading
-```
-Loading gold standard from data/ud/UD_German-GSD/de_gsd-ud-test.conllu...
+Loading gold standard from data/ud/UD_Finnish-TDT/fi_tdt-ud-test.conllu...
 Loaded 500 gold standard trees
-```
 
-#### Tree Statistics
-```
+Parsing 500 sentences...
+  Parsed 100/500 sentences...
+  Parsed 200/500 sentences...
+  Parsed 300/500 sentences...
+  Parsed 400/500 sentences...
+  Parsed 500/500 sentences...
+Parsing complete!
+
+Computing tree statistics for 500 sentences...
+
 ============================================================
-Dependency Tree Statistics - German
+Dependency Tree Statistics - Finnish
 ============================================================
 
 Tree Depth:
-  Average: 5.34
-  Std Dev: 1.89
-  Min: 2
-  Max: 14
+  Average: 3.25
+  Std Dev: 1.79
+  Min: 0
+  Max: 13
 
 Node Degree Distribution:
-  Degree 0:  8,234 nodes (45.23%)
-  Degree 1:  4,567 nodes (25.12%)
-  Degree 2:  2,891 nodes (15.89%)
-  ...
+  Degree 0:  4,236 nodes (64.66%)
+  Degree 1:    926 nodes (14.14%)
+  Degree 2:    391 nodes ( 5.97%)
+  Degree 3:    310 nodes ( 4.73%)
+  Degree 4:    319 nodes ( 4.87%)
+  Degree 5:    187 nodes ( 2.85%)
 
 Average Distance to Root by POS:
-  VERB        : 0.98
-  AUX         : 1.23
-  ROOT        : 0.00
-  NOUN        : 2.45
-  ...
+  X           : 0.00
+  INTJ        : 1.30
+  VERB        : 1.46
+  AUX         : 1.91
+  PUNCT       : 1.98
+  PROPN       : 2.14
+  NOUN        : 2.17
+  SYM         : 2.36
+  ADV         : 2.40
+  PRON        : 2.54
 
 Most Common Leaf Node POS Tags:
-  NOUN        :  3,456 (34.56%)
-  PUNCT       :  2,345 (23.45%)
-  ADJ         :  1,234 (12.34%)
-  ...
-```
+  PUNCT       :  1,033 (24.39%)
+  ADV         :    571 (13.48%)
+  PRON        :    553 (13.05%)
+  NOUN        :    551 (13.01%)
+  AUX         :    476 (11.24%)
+  CCONJ       :    341 ( 8.05%)
+  ADJ         :    258 ( 6.09%)
+  SCONJ       :    181 ( 4.27%)
+  PROPN       :    105 ( 2.48%)
+  ADP         :     70 ( 1.65%)
 
-#### Dependency Relations
-```
+Most Common Ancestors (by child POS):
+  NOUN:
+    → VERB        :  1,937
+    → NOUN        :    768
+    → ADJ         :    190
+    → PRON        :    176
+    → ADV         :     88
+  VERB:
+    → VERB        :    856
+    → NOUN        :    279
+    → PRON        :     94
+    → ADJ         :     85
+    → ADV         :     41
+  ADJ:
+    → VERB        :    500
+    → NOUN        :    450
+    → ADJ         :     78
+    → PRON        :     55
+    → ADV         :     26
+
+Most Common Descendants (by parent POS):
+  NOUN:
+    → NOUN        :    373
+    → ADJ         :    277
+    → PRON        :    220
+    → PUNCT       :    217
+    → VERB        :    155
+  VERB:
+    → NOUN        :    814
+    → PUNCT       :    610
+    → VERB        :    384
+    → ADV         :    354
+    → PRON        :    341
+  ADJ:
+    → PUNCT       :     89
+    → NOUN        :     82
+    → ADV         :     75
+    → AUX         :     73
+    → VERB        :     41
+
 Most Common Dependency Relations:
-  punct               :  2,456 (12.34%)
-  case                :  1,987 (9.87%)
-  det                 :  1,765 (8.76%)
-  nsubj               :  1,543 (7.65%)
-  ...
-```
+  punct               :  1,027 (15.68%)
+  advmod              :    623 ( 9.51%)
+  obl                 :    529 ( 8.08%)
+  ROOT                :    526 ( 8.03%)
+  conj                :    410 ( 6.26%)
+  obj                 :    395 ( 6.03%)
+  nsubj               :    387 ( 5.91%)
+  cc                  :    345 ( 5.27%)
+  amod                :    286 ( 4.37%)
+  aux                 :    251 ( 3.83%)
+  nmod:poss           :    207 ( 3.16%)
+  cop                 :    203 ( 3.10%)
+  mark                :    190 ( 2.90%)
+  nsubj:cop           :    182 ( 2.78%)
+  det                 :    134 ( 2.05%)
 
-#### Parser Evaluation
-```
 ============================================================
-Parser Evaluation - German
-============================================================
-
-Evaluation Results (18,234 tokens):
-  Unlabeled Attachment Score (UAS): 89.45%
-  Labeled Attachment Score (LAS):   86.23%
-  Label Accuracy Score (LS):        91.67%
-```
-
-#### Example Parses
-```
-============================================================
-Example Dependency Parses - German
+Example Dependency Parses - Finnish
 ============================================================
 
-Example 1: Der Hund läuft schnell durch den Park.
+Example 1: Taas teatteriin
 ------------------------------------------------------------
 Token           POS      Head            Dep Rel         Children
 ------------------------------------------------------------
-Der             DET      Hund            det
-Hund            NOUN     läuft           nsubj           Der
-läuft           VERB     ROOT            ROOT            Hund, schnell, durch, .
-schnell         ADV      läuft           advmod
-durch           ADP      läuft           obl             Park
-den             DET      Park            det
-Park            NOUN     durch           pobj            den
-.               PUNCT    läuft           punct
-```
+Taas            ADV      teatteriin      advmod          
+teatteriin      VERB     ROOT            ROOT            Taas
 
-### Saved Visualizations
+Example 2: Tänäänkin pitäisi mennä teatteriin .
+------------------------------------------------------------
+Token           POS      Head            Dep Rel         Children
+------------------------------------------------------------
+Tänäänkin       ADV      mennä           advmod          
+pitäisi         AUX      mennä           aux             
+mennä           VERB     ROOT            ROOT            Tänäänkin, pitäisi, teatteriin, .
+teatteriin      NOUN     mennä           obl             
+.               PUNCT    mennä           punct           
 
-#### 1. `dependency_analysis_German.png`
-Six-panel figure containing:
-1. **Tree Depth Distribution**: Histogram of parse tree depths
-2. **Node Degree Distribution**: Bar chart of child counts
-3. **Distance to Root by POS**: Average distances for different POS tags
-4. **Top Dependency Relations**: Most frequent dependency types
-5. **Leaf Node POS Distribution**: POS tags of terminal nodes
-6. **POS Tag Distribution**: Overall POS tag frequencies
+Example 3: Varasin pupulle ja minulle sekä sille sisarentyttärelleni , joka pääsi Turkuun lakia lukemaan , liput kaupunginteatterin Laulavat sadepisarat -musikaaliin .
+------------------------------------------------------------
+Token           POS      Head            Dep Rel         Children
+------------------------------------------------------------
+Varasin         VERB     ROOT            ROOT            pupulle, sille, sisarentyttärelleni
+pupulle         NOUN     Varasin         obl             minulle
+ja              CCONJ    minulle         cc              
+minulle         PRON     pupulle         conj            ja
+sekä            CCONJ    sille           cc              
+sille           PRON     Varasin         obl             sekä
+sisarentyttärelleni NOUN     Varasin         obl             pääsi, kaupunginteatterin
+,               PUNCT    pääsi           punct           
+joka            PRON     pääsi           nsubj           
+pääsi           VERB     sisarentyttärelleni acl:relcl       ,, joka, Turkuun, lukemaan
+Turkuun         PROPN    pääsi           obl             
+lakia           NOUN     lukemaan        obj             
+lukemaan        VERB     pääsi           advcl           lakia
+,               PUNCT    liput           punct           
+liput           NOUN     kaupunginteatterin nmod            ,
+kaupunginteatterin NOUN     sisarentyttärelleni conj            liput
+Laulavat        ADJ      sadepisarat     amod            
+sadepisarat     NOUN     -musikaaliin    nsubj:cop       Laulavat
+-musikaaliin    NOUN     ROOT            ROOT            sadepisarat, .
+.               PUNCT    -musikaaliin    punct           
 
-#### 2. `dependency_comparison.png` (if comparing languages)
-Four-panel comparative figure:
-1. Tree depth comparison (overlaid histograms)
-2. Distance to root by POS (grouped bar chart)
-3. Node degree distribution comparison
-4. Summary statistics table
+============================================================
+Parser Evaluation - Finnish
+============================================================
 
-## Key Insights
+Evaluation Results (6506 tokens):
+  Unlabeled Attachment Score (UAS): 74.56%
+  Labeled Attachment Score (LAS):   62.40%
+  Label Accuracy Score (LS):        77.90%
 
-### Tree Depth
-- **Shallow trees** (depth 2-4): Simple sentences
-- **Deep trees** (depth 7+): Complex sentences with multiple embeddings
+Visualization saved: dependency_analysis_Finnish.png
 
-### Node Degree
-- Most nodes have 0-2 children (binary branching tendency)
-- High-degree nodes (3+ children) are often verbs with multiple arguments
+============================================================
+Testing with Ambiguous Sentences
+============================================================
 
-### POS Distance Patterns
-- **VERBs**: Closest to root (often ARE the root)
-- **Function words** (DET, ADP): Medium distance
-- **Content words** (NOUN, ADJ): Further from root
+Parsing ambiguous sentences...
 
-### Common Dependency Relations
-German-specific patterns:
-- High frequency of `case` (prepositions)
-- Frequent `det` (articles)
-- Common `nsubj` and `obj` (subject/object)
+============================================================
+Example Dependency Parses - Finnish
+============================================================
 
-## Code Structure
+Example 1: Näen miehen kaukoputkella.
+------------------------------------------------------------
+Token           POS      Head            Dep Rel         Children
+------------------------------------------------------------
+Näen            VERB     ROOT            ROOT            kaukoputkella, .
+miehen          NOUN     kaukoputkella   nmod:poss       
+kaukoputkella   NOUN     Näen            obl             miehen
+.               PUNCT    Näen            punct           
 
-**Lines 17-404**: `DependencyAnalyzer` class
-- Lines 28-38: Model loading
-- Lines 40-88: Gold standard loading
-- Lines 90-109: Sentence parsing
-- Lines 111-184: Tree statistics computation
-- Lines 186-243: Statistics printing
-- Lines 244-309: Parser evaluation
-- Lines 311-329: Example display
-- Lines 331-403: Visualization
+Example 2: Poliisi ampui miehen aseella.
+------------------------------------------------------------
+Token           POS      Head            Dep Rel         Children
+------------------------------------------------------------
+Poliisi         NOUN     ampui           nsubj           
+ampui           VERB     ROOT            ROOT            Poliisi, aseella, .
+miehen          NOUN     aseella         nmod:poss       
+aseella         NOUN     ampui           obl             miehen
+.               PUNCT    ampui           punct           
 
-**Lines 406-494**: `compare_languages()` function
-**Lines 497-562**: `main()` function
+Example 3: Koira puraisee miestä puistossa.
+------------------------------------------------------------
+Token           POS      Head            Dep Rel         Children
+------------------------------------------------------------
+Koira           NOUN     puraisee        nsubj           
+puraisee        VERB     ROOT            ROOT            Koira, miestä, puistossa, .
+miestä          NOUN     puraisee        obj             
+puistossa       NOUN     puraisee        obl             
+.               PUNCT    puraisee        punct           
 
-## Advanced Usage
+================================================================================
+ANALYSIS COMPLETE!
+================================================================================
 
-### Adding Hindi or Other Languages
-1. Install/train a SpaCy model for the language
-2. Add analyzer initialization:
-```python
-hindi_analyzer = DependencyAnalyzer(
-    "Hindi",
-    "your_hindi_model",
-    "data/ud/UD_Hindi-HDTB/hi_hdtb-ud-test.conllu"
-)
-```
-3. Follow the same pipeline as German
+Generated files:
+  - dependency_analysis_Finnish.png
 
-### Custom Sentence Parsing
-```python
-analyzer = DependencyAnalyzer("German", "de_core_news_sm")
-analyzer.load_spacy_model()
-
-custom_sentences = ["Your sentence here.", "Another one."]
-analyzer.parse_sentences(sentences=custom_sentences)
-```
-
-### Visualize Specific Sentences
-```python
-# After parsing
-from spacy import displacy
-
-doc = analyzer.nlp("Das ist ein Test.")
-displacy.serve(doc, style="dep")
-```
-
-## Performance Notes
-- Parsing speed: ~100-1000 sentences/second (depends on model size)
-- Memory usage:
-  - Small model: ~200MB
-  - Large model: ~1GB
-- Evaluation time: ~1-2 seconds for 500 sentences
-
-## Troubleshooting
-
-### Issue: "Model not found"
-**Solution**:
-```bash
-python -m spacy download de_core_news_sm
-```
-
-### Issue: "Mismatched token counts"
-**Solution**: Some CoNLL-U sentences may have multi-word tokens that SpaCy tokenizes differently. These are automatically skipped in evaluation.
-
-### Issue: "Low accuracy scores"
-**Solution**:
-- SpaCy may use different annotation conventions than UD
-- Try a larger model (md or lg)
-- Some discrepancy is normal (80-90% is typical)
-
-## Understanding Dependency Relations
-
-Common UD relations:
-- **nsubj**: Nominal subject
-- **obj**: Object
-- **iobj**: Indirect object
-- **obl**: Oblique nominal
-- **det**: Determiner
-- **case**: Case marking (preposition)
-- **amod**: Adjectival modifier
-- **advmod**: Adverbial modifier
-- **aux**: Auxiliary verb
-- **cc**: Coordinating conjunction
-- **conj**: Conjunct
-
-Full list: https://universaldependencies.org/u/dep/
-
-## Related Scripts
-- **Prerequisite**: Run `treebanks_download.py` to get UD data
-- **Previous**: `deliverable_3_corpus_statistics.py` for corpus analysis
-- **Previous**: `deliverable_4_tokenizer_analysis.py` for morphological analysis
-
-## References
-- Universal Dependencies: https://universaldependencies.org/
-- SpaCy: https://spacy.io/
-- Dependency Grammar: Tesnière (1959), Nivre et al. (2016)
+Note: Hindi parsing would require a trained model.
+You can train your own using SpaCy or use alternative parsers.
+(venv) shrinath@dellpro:~/ShriCode/Langugae-as-Data$ 

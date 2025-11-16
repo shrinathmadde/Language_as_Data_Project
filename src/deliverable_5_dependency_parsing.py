@@ -502,39 +502,39 @@ def main():
     print("="*80)
 
     # SpaCy models to use
-    # German: de_core_news_sm, de_core_news_md, de_core_news_lg
+    # Finnish: fi_core_news_sm, fi_core_news_md, fi_core_news_lg
     # Hindi: Not available in standard SpaCy
-    # For this example, we'll use German. You can add other languages as needed.
+    # For this example, we'll use Finnish. You can add other languages as needed.
 
-    german_model = "de_core_news_sm"  # or de_core_news_md, de_core_news_lg
-    german_test = "data/ud/UD_German-GSD/de_gsd-ud-test.conllu"
+    Finnish_model = "fi_core_news_sm"  # or fi_core_news_md, fi_core_news_lg
+    Finnish_test = "data/ud/UD_Finnish-TDT/fi_tdt-ud-test.conllu"
 
     # Note: Hindi doesn't have a standard SpaCy model
     # You would need to train one or use an alternative
-    # For demonstration, we'll focus on German
+    # For demonstration, we'll focus on Finnish
 
-    # ===== GERMAN ANALYSIS =====
+    # ===== Finnish ANALYSIS =====
     print("\n" + "="*80)
-    print("GERMAN DEPENDENCY PARSING")
+    print("Finnish DEPENDENCY PARSING")
     print("="*80)
 
-    german_analyzer = DependencyAnalyzer("German", german_model, german_test)
-    german_analyzer.load_spacy_model()
-    german_analyzer.load_gold_conllu(max_sentences=500)
-    german_analyzer.parse_sentences()
+    Finnish_analyzer = DependencyAnalyzer("Finnish", Finnish_model, Finnish_test)
+    Finnish_analyzer.load_spacy_model()
+    Finnish_analyzer.load_gold_conllu(max_sentences=500)
+    Finnish_analyzer.parse_sentences()
 
     # Compute statistics
-    german_stats = german_analyzer.compute_tree_statistics()
-    german_analyzer.print_statistics(german_stats)
+    Finnish_stats = Finnish_analyzer.compute_tree_statistics()
+    Finnish_analyzer.print_statistics(Finnish_stats)
 
     # Show examples
-    german_analyzer.show_examples(n=3)
+    Finnish_analyzer.show_examples(n=3)
 
     # Evaluate parser
-    german_eval = german_analyzer.evaluate_parser()
+    Finnish_eval = Finnish_analyzer.evaluate_parser()
 
     # Visualize
-    german_analyzer.visualize_statistics(german_stats)
+    Finnish_analyzer.visualize_statistics(Finnish_stats)
 
     # Optional: Test with ambiguous sentences
     print(f"\n{'='*60}")
@@ -542,20 +542,20 @@ def main():
     print(f"{'='*60}")
 
     ambiguous_sentences = [
-        "Ich sehe den Mann mit dem Fernrohr.",  # PP attachment ambiguity
-        "Die Polizei erschoss den Mann mit der Waffe.",  # Instrument ambiguity
-        "Der Hund beißt den Mann im Park."  # Locative ambiguity
+        "Näen miehen kaukoputkella.",  # PP attachment ambiguity (I see the man with the telescope)
+        "Poliisi ampui miehen aseella.",  # Instrument ambiguity (Police shot the man with the gun)
+        "Koira puraisee miestä puistossa."  # Locative ambiguity (The dog bites the man in the park)
     ]
 
     print("\nParsing ambiguous sentences...")
-    ambiguous_parsed = [german_analyzer.nlp(sent) for sent in ambiguous_sentences]
-    german_analyzer.show_examples(n=3, ambiguous=ambiguous_parsed)
+    ambiguous_parsed = [Finnish_analyzer.nlp(sent) for sent in ambiguous_sentences]
+    Finnish_analyzer.show_examples(n=3, ambiguous=ambiguous_parsed)
 
     print("\n" + "="*80)
     print("ANALYSIS COMPLETE!")
     print("="*80)
     print("\nGenerated files:")
-    print(f"  - dependency_analysis_German.png")
+    print(f"  - dependency_analysis_Finnish.png")
 
     print("\nNote: Hindi parsing would require a trained model.")
     print("You can train your own using SpaCy or use alternative parsers.")

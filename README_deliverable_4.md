@@ -1,292 +1,241 @@
-# Deliverable 4: Morphological Analysis using Sub-word Tokenizers
+(venv) shrinath@dellpro:~/ShriCode/Langugae-as-Data/src$ python deliverable_4_tokenizer_analysis.py
+================================================================================
+DELIVERABLE 4: MORPHOLOGICAL ANALYSIS WITH SUB-WORD TOKENIZERS
+================================================================================
 
-## Overview
-Train and analyze sub-word tokenizers (BPE or Unigram) for German and Hindi to understand morphological segmentation patterns. This script explores how different tokenization algorithms handle word formation, affixes, and morphological complexity across languages.
+================================================================================
+FINNISH TOKENIZER
+================================================================================
 
-## Purpose
-- Train BPE (Byte Pair Encoding) or Unigram tokenizers on German and Hindi
-- Analyze how tokenizers segment words based on frequency
-- Compare tokenization patterns for frequent vs rare vs unseen words
-- Study morphological consistency (plurals, verb forms, compounds)
-- Evaluate tokenizer performance on different word categories
+Loading data from ../data/ud/UD_Finnish-TDT/fi_tdt-ud-train.conllu...
+Loaded 162815 words from 12217 sentences
 
-## Requirements
-```bash
-pip install tokenizers numpy matplotlib seaborn
-```
+Loading data from ../data/ud/UD_Finnish-TDT/fi_tdt-ud-test.conllu...
+Loaded 21070 words from 1555 sentences
 
-## Input Data Required
-
-### Universal Dependencies CoNLL-U Files
-- **German Train**: `data/ud/UD_German-GSD/de_gsd-ud-train.conllu`
-- **German Test**: `data/ud/UD_German-GSD/de_gsd-ud-test.conllu`
-- **Hindi Train**: `data/ud/UD_Hindi-HDTB/hi_hdtb-ud-train.conllu`
-- **Hindi Test**: `data/ud/UD_Hindi-HDTB/hi_hdtb-ud-test.conllu`
-
-## Usage
-
-### Basic Execution
-```bash
-python deliverable_4_tokenizer_analysis.py
-```
-
-### Customization
-
-#### Choose Tokenizer Type
-Edit line 336:
-```python
-model_type = 'BPE'  # or 'Unigram'
-```
-
-#### Adjust Vocabulary Size
-Edit line 337:
-```python
-vocab_size = 5000  # or any desired size
-```
-
-#### Modify Normalization Settings
-In the `create_tokenizer()` calls (lines 358, 393):
-```python
-analyzer.create_tokenizer(
-    normalize=True,      # Apply NFKC normalization
-    strip_accents=False, # Remove accent marks
-    lowercase=False      # Convert to lowercase
-)
-```
-
-## Core Components
-
-### Class: `TokenizerAnalyzer`
-Main class for training and analyzing tokenizers.
-
-**Initialization Parameters:**
-- `language_name`: Language identifier (e.g., "German")
-- `ud_train_file`: Path to training CoNLL-U file
-- `ud_test_file`: Path to test CoNLL-U file
-- `vocab_size`: Target vocabulary size (default: 5000)
-- `model_type`: 'BPE' or 'Unigram'
-
-**Key Methods:**
-- `load_conllu_data()` - Extract words from CoNLL-U files
-- `create_tokenizer()` - Initialize tokenizer with normalization options
-- `train_tokenizer()` - Train the tokenizer on training data
-- `analyze_tokenization()` - Analyze performance on different word categories
-- `analyze_morphology()` - Study morphological segmentation patterns
-- `visualize_token_distribution()` - Create frequency and length visualizations
-
-## Analysis Features
-
-### 1. Word Category Analysis
-Words are categorized by frequency in training data:
-- **Frequent words**: Frequency ≥ 100
-- **Rare words**: Frequency between 2-5
-- **Hapax words**: Frequency = 1
-- **Unseen words**: Words only in test set
-
-For each category, computes:
-- Average tokens per word
-- Standard deviation of tokens per word
-- Average token length
-
-### 2. Morphological Pattern Analysis
-
-#### German Examples
-- **Plurals**: -en, -e, -er suffixes
-  - e.g., Hund → Hunde → Hunden
-- **Past Participles**: ge-...-t prefix/suffix pattern
-  - e.g., machen → gemacht
-- **Compounds**: Word composition
-  - e.g., Haustür → Haus + Tür
-- **Diminutives**: -chen suffix
-  - e.g., Haus → Häuschen
-
-#### Hindi Examples
-- **Plurals**: Various plural markers
-  - e.g., लड़का → लड़के
-- **Case Markers**: Postpositions
-  - e.g., घर में, घर से, घर को
-- **Verb Forms**: Tense/aspect markers
-  - e.g., जाना → जाता → गया
-
-### 3. Consistency Analysis
-Checks whether the tokenizer consistently segments:
-- Words with common affixes
-- Morphological variants of the same root
-- Related word forms
-
-## Output
-
-### Console Output
-
-#### Tokenizer Creation
-```
 ============================================================
-Creating BPE Tokenizer for German
+Creating BPE Tokenizer for Finnish
 ============================================================
 Vocabulary size: 5000
 Normalization settings:
   - NFKC normalization: True
   - Strip accents: False
   - Lowercase: False
-```
 
-#### Training Progress
-```
 Training BPE tokenizer...
+[00:00:00] Pre-processing files (1 Mo)    ████████████████████                100%[00:00:00] Tokenize words                 ████████████████████ 48108    /    48108
+[00:00:00] Count pairs                    ████████████████████ 48108    /    48108
+[00:00:00] Compute merges                 ████████████████████ 4755     /     4755
 Training complete!
-Tokenizer saved to: tokenizer_German_BPE.json
-```
+Tokenizer saved to: tokenizer_Finnish_BPE.json
 
-#### Analysis Results
-```
 ============================================================
-Analyzing Tokenization for German
+Analyzing Tokenization for Finnish
 ============================================================
 
 Word categories in training data:
-  Frequent words (>=100): 523
-  Rare words (2-5): 8,234
-  Hapax (frequency=1): 15,678
-  Unseen in test: 2,345
+  Frequent words (>=100): 98
+  Rare words (2-5): 11217
+  Hapax (frequency=1): 34753
+  Unseen in test: 4372
 
-Category         Tokens/Word     Avg Token Len
+Category        Tokens/Word     Avg Token Len  
 ---------------------------------------------
-frequent         1.23            4.56
-rare             2.45            3.21
-hapax            3.12            2.87
-unseen           3.45            2.65
+frequent        1.00            4.07           
+rare            2.38            3.64           
+hapax           3.34            3.35           
+unseen          3.54            3.08           
+
+Analyzing full test corpus...
+
+Overall test corpus statistics:
+  Total tokens generated: 23897
+  Unique tokens: 3469
+  Average tokens per word: 1.77
+  Std tokens per word: 1.13
 
 Top 20 most frequent tokens:
-   1. der                  12,345
-   2. die                  11,234
-   3. und                   9,876
-  ...
-```
+   1. .                        849
+   2. ,                        815
+   3. ja                       495
+   4. on                       322
+   5. että                     158
+   6. se                       148
+   7. -                        131
+   8. a                        130
+   9. ei                       129
+  10. t                        101
+  11. )                         96
+  12. ta                        94
+  13. i                         91
+  14. si                        87
+  15. (                         85
+  16. kin                       79
+  17. e                         78
+  18. lle                       77
+  19. en                        76
+  20. oli                       75
 
-#### Morphological Segmentation
-```
 ============================================================
-Morphological Segmentation Analysis for German
+Morphological Segmentation Analysis for Finnish
 ============================================================
 
-Plurals (-en, -e, -er):
-  Hund                 → Hund
-  Hunde                → Hund | e
-  Hunden               → Hund | en
-  Kind                 → Kind
-  Kinder               → Kind | er
-```
+Plurals (-t):
+  talo                 → talo
+  talot                → talo | t
+  kissa                → kissa
+  kissat               → kissa | t
+  koira                → koi | ra
+  koirat               → koi | rat
 
-### Saved Files
+Case markers:
+  talo                 → talo
+  talossa              → talo | ssa
+  talosta              → talo | sta
+  taloon               → talo | on
+  talon                → talon
 
-#### 1. Trained Tokenizer Models (JSON)
-- `tokenizer_German_BPE.json` (or Unigram)
-- `tokenizer_Hindi_BPE.json` (or Unigram)
+Possessive suffixes:
+  talo                 → talo
+  taloni               → tal | oni
+  talosi               → talo | si
+  talonsa              → talon | sa
 
-These can be loaded later for reuse:
-```python
-from tokenizers import Tokenizer
-tokenizer = Tokenizer.from_file("tokenizer_German_BPE.json")
-```
+Compounds:
+  kirjasto             → kirja | sto
+  kirja                → kirja
+  talo                 → talo
+  kahvikuppi           → kah | vi | ku | ppi
+  kahvi                → kah | vi
+  kuppi                → ku | ppi
 
-#### 2. Visualizations (PNG)
-- `tokenizer_analysis_German_BPE.png`
-- `tokenizer_analysis_Hindi_BPE.png`
+============================================================
+Segmentation Consistency Analysis
+============================================================
 
-Each visualization contains two panels:
-- **Left**: Token frequency distribution (rank vs frequency)
-- **Right**: Token length distribution (histogram)
+Words ending in '-t' (potential plurals):
+  meidät               → mei | dät
+  ihmiset              → ihmiset
+  uskaltautuivat       → uskalta | utuivat
+  onnistunut           → onnistunut
+  noussut              → noussut
+  onnistunut           → onnistunut
+  tapahtumat           → tapahtu | mat
+  alkoivat             → alkoi | vat
+  vienyt               → vien | yt
+  tullut               → tullut
 
-### Temporary Files
-The script creates temporary training files:
-- `temp_German_train.txt`
-- `temp_Hindi_train.txt`
+Visualization saved: tokenizer_analysis_Finnish_BPE.png
 
-These are automatically cleaned up after training.
+================================================================================
+HINDI TOKENIZER
+================================================================================
 
-## Key Insights
+Loading data from ../data/ud/UD_Hindi-HDTB/hi_hdtb-ud-train.conllu...
+Loaded 281057 words from 13306 sentences
 
-### BPE vs Unigram
-- **BPE**: Merges most frequent character pairs iteratively
-  - Good for compound words
-  - Deterministic segmentation
+Loading data from ../data/ud/UD_Hindi-HDTB/hi_hdtb-ud-test.conllu...
+Loaded 35430 words from 1684 sentences
 
-- **Unigram**: Probabilistic language model approach
-  - Better for agglutinative languages
-  - Can produce multiple segmentations
+============================================================
+Creating BPE Tokenizer for Hindi
+============================================================
+Vocabulary size: 5000
+Normalization settings:
+  - NFKC normalization: True
+  - Strip accents: False
+  - Lowercase: False
 
-### Frequency Effects
-- **Frequent words**: Usually segmented as single tokens
-- **Rare words**: Broken into more sub-word units
-- **Unseen words**: Most fragmented, relies on character-level patterns
+Training BPE tokenizer...
+[00:00:00] Pre-processing files (3 Mo)    ████████████████████                100%[00:00:00] Tokenize words                 ████████████████████ 16651    /    16651
+[00:00:00] Count pairs                    ████████████████████ 16651    /    16651
+[00:00:00] Compute merges                 ████████████████████ 4896     /     4896
+Training complete!
+Tokenizer saved to: tokenizer_Hindi_BPE.json
 
-### Morphological Complexity
-- **German**: Compound word formation well-captured
-- **Hindi**: Agglutinative morphology requires more tokens per word
+============================================================
+Analyzing Tokenization for Hindi
+============================================================
 
-## Code Structure
+Word categories in training data:
+  Frequent words (>=100): 338
+  Rare words (2-5): 5362
+  Hapax (frequency=1): 7252
+  Unseen in test: 1154
 
-**Lines 21-320**: `TokenizerAnalyzer` class
-- Lines 76-130: Tokenizer creation and configuration
-- Lines 132-145: Training functionality
-- Lines 146-237: Tokenization analysis
-- Lines 239-293: Morphological pattern analysis
-- Lines 295-319: Visualization
+Category        Tokens/Word     Avg Token Len  
+---------------------------------------------
+frequent        1.00            3.38           
+rare            2.42            2.34           
+hapax           2.83            2.26           
+unseen          2.91            2.17           
 
-**Lines 322-417**: `main()` function
-- Separate pipelines for German and Hindi
-- Sequential processing: load → create → train → analyze → visualize
+Analyzing full test corpus...
 
-## Advanced Usage
+Overall test corpus statistics:
+  Total tokens generated: 25629
+  Unique tokens: 3000
+  Average tokens per word: 1.20
+  Std tokens per word: 0.58
 
-### Custom Morphological Examples
-```python
-german_examples = {
-    'Your Category': ['word1', 'word2', 'word3'],
-    'Another Category': ['word4', 'word5']
-}
-german_analyzer.analyze_morphology(examples=german_examples)
-```
+Top 20 most frequent tokens:
+   1. के                     1,037
+   2. ।                        992
+   3. में                      635
+   4. की                       602
+   5. है                       565
+   6. को                       476
+   7. ने                       404
+   8. कि                       375
+   9. से                       349
+  10. का                       312
+  11. पर                       257
+  12. और                       255
+  13. ,                        201
+  14. कहा                      201
+  15. इस                       177
+  16. हैं                      170
+  17. भी                       143
+  18. -                        141
+  19. कर                       137
+  20. लिए                      118
 
-### Different Frequency Thresholds
-In `analyze_tokenization()` call:
-```python
-stats, token_freq = analyzer.analyze_tokenization(
-    test_sentences,
-    frequent_threshold=200,  # Higher threshold
-    rare_threshold=3         # Lower threshold
-)
-```
+============================================================
+Morphological Segmentation Analysis for Hindi
+============================================================
 
-### Sample Fewer Test Sentences
-Modify line 218 for faster processing:
-```python
-for sentence in test_sentences[:500]:  # Only 500 instead of 1000
-```
+Plurals:
+  लड़का                → लड़ | का
+  लड़के                → लड़ | के
+  लड़की                → लड़की
+  लड़कियाँ             → लड़ | किया | ँ
 
-## Performance Notes
-- Training time: ~30 seconds per language (depends on corpus size)
-- Analysis time: ~1-2 minutes per language
-- Memory usage: Moderate (~500MB for vocab_size=5000)
-- Temporary files are cleaned up automatically
+Case markers:
+  घर                   → घर
+  घर में               → घर | में
+  घर से                → घर | से
+  घर को                → घर | को
 
-## Troubleshooting
+Verb forms:
+  जाना                 → जाना
+  जाता                 → जाता
+  जाती                 → जाती
+  गया                  → गया
+  गई                   → गई
 
-### Issue: "Tokenizer not created"
-**Solution**: Ensure `create_tokenizer()` is called before `train_tokenizer()`
+============================================================
+Segmentation Consistency Analysis
+============================================================
 
-### Issue: "No training data"
-**Solution**: Check that CoNLL-U files exist and are readable
+Visualization saved: tokenizer_analysis_Hindi_BPE.png
 
-### Issue: "Empty sentences"
-**Solution**: Verify CoNLL-U files are properly formatted (not truncated)
+================================================================================
+ANALYSIS COMPLETE!
+================================================================================
 
-## Related Scripts
-- **Prerequisite**: Run `treebanks_download.py` to get UD data
-- **Previous**: `deliverable_3_corpus_statistics.py` for corpus analysis
-- **Next**: `deliverable_5_dependency_parsing.py` for syntactic analysis
-
-## References
-- BPE: [Sennrich et al. (2016)](https://arxiv.org/abs/1508.07909)
-- Unigram: [Kudo (2018)](https://arxiv.org/abs/1804.10959)
-- HuggingFace Tokenizers: https://github.com/huggingface/tokenizers
+Generated files:
+  - tokenizer_Finnish_BPE.json
+  - tokenizer_Hindi_BPE.json
+  - tokenizer_analysis_Finnish_BPE.png
+  - tokenizer_analysis_Hindi_BPE.png
+(venv) shrinath@dellpro:~/ShriCode/Langugae-as-Data/src$
