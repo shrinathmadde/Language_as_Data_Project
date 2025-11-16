@@ -922,34 +922,6 @@ sadepisarat        NOUN   -musikaaliin      nsubj:cop     Laulavat
 - Two ROOT nodes (should be single ROOT)
 - Coordination structure partially mis-attached
 
-#### Parser Evaluation
-
-**Evaluation Metrics (500 sentences, 6,506 tokens):**
-
-| Metric | Score | Interpretation |
-|--------|-------|----------------|
-| **UAS** (Unlabeled Attachment Score) | 74.56% | Correctly identified head for 74.56% of tokens |
-| **LAS** (Labeled Attachment Score) | 62.40% | Correctly identified both head and relation for 62.40% |
-| **LS** (Label Accuracy) | 77.90% | Correctly identified relation label for 77.90% |
-
-*Analysis:*
-
-**Performance assessment:**
-- UAS of 74.56% indicates moderate syntactic accuracy
-- 12.16% gap between UAS and LAS suggests label prediction is the main error source
-- Label accuracy (77.90%) higher than LAS because it ignores attachment errors
-
-**Comparison to state-of-art:**
-- Modern dependency parsers achieve 85-95% UAS on well-studied languages
-- 74.56% is reasonable for a small model (`fi_core_news_sm`)
-- Finnish's flexible word order makes parsing challenging
-
-**Error sources:**
-- Flexible word order: Finnish allows scrambling, making attachment ambiguous
-- Long-distance dependencies: Relative clauses and coordination
-- Rich morphology: Case marking provides clues but also complexity
-- Compound handling: Long compounds may confuse parser
-
 #### Ambiguous Sentence Testing
 
 **Test 1:** *"Näen miehen kaukoputkella."* (I-see man-ACC telescope-ADE)
