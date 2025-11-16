@@ -646,17 +646,6 @@ Hindi postpositions are nearly always segmented correctly as separate tokens bec
 
 **Finnish Tokenization:**
 
-*Strengths:*
-- Successfully segments many case suffixes (-ssa, -sta, -on)
-- Identifies plural marker -t in many contexts
-- Segments common compounds appropriately
-
-*Weaknesses:*
-- Inconsistent with high-frequency inflected forms (learns them whole)
-- Possessive suffixes poorly handled
-- Genitive case (-n) often not segmented
-- Subword splits don't always align with morpheme boundaries (tal | oni vs talo | ni)
-
 *Why segmentation doesn't follow morphological intuition:*
 1. **Statistical vs. linguistic:** BPE optimizes for compression, not morphological correctness
 2. **Frequency effects:** High-frequency inflected forms learned as single units
@@ -664,16 +653,6 @@ Hindi postpositions are nearly always segmented correctly as separate tokens bec
 4. **Compound ambiguity:** Not all character sequences are morpheme boundaries
 
 **Hindi Tokenization:**
-
-*Strengths:*
-- Postpositions correctly segmented (free morphemes)
-- Consistent handling of high-frequency markers
-- Lower tokens-per-word overall (1.20 vs Finnish 1.77)
-
-*Weaknesses:*
-- Inflected verb forms not meaningfully segmented
-- Noun-postposition boundaries clear, but internal noun morphology opaque
-- Gender/number markers within words not consistently isolated
 
 *Why segmentation works better for Hindi:*
 1. **Analytic tendency:** Many grammatical functions via separate words (postpositions)
