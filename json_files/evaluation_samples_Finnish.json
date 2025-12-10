@@ -1,0 +1,130 @@
+[
+  {
+    "id": 1,
+    "prompt": "hän on",
+    "output_A": "hän on varma että <UNK> <UNK> niitä , kuten pystyn <UNK> <UNK> .",
+    "output_B": "hän on ollut professorina työ , on kyllä paljon tulossa kuin eurooppalaisen <UNK> .",
+    "model_A": "Baseline",
+    "model_B": "Label_Smoothing"
+  },
+  {
+    "id": 2,
+    "prompt": "se oli",
+    "output_A": "se oli kamalaa , joka laajeni <UNK> mccainin <UNK> .",
+    "output_B": "se oli 1800-luvun aikana hyvin .",
+    "model_A": "Baseline",
+    "model_B": "Label_Smoothing"
+  },
+  {
+    "id": 3,
+    "prompt": "minä olen",
+    "output_A": "minä olen toisenlainen .",
+    "output_B": "minä olen varma , että en ole , mutta se on joku <UNK> .",
+    "model_A": "Baseline",
+    "model_B": "Label_Smoothing"
+  },
+  {
+    "id": 4,
+    "prompt": "he ovat",
+    "output_A": "he ovat tyytyväisiä <UNK> .",
+    "output_B": "he ovat tyytyväisiä toistensa <UNK> kanssa .",
+    "model_A": "Baseline",
+    "model_B": "Label_Smoothing"
+  },
+  {
+    "id": 5,
+    "prompt": "suomen hallitus",
+    "output_A": "suomen hallitus on keskittynyt <UNK> seurojen <UNK> , <UNK> , <UNK> ja <UNK> ja stora <UNK> <UNK> .",
+    "output_B": "suomen hallitus on <UNK> ja päivitetty .",
+    "model_A": "Baseline",
+    "model_B": "Label_Smoothing"
+  },
+  {
+    "id": 6,
+    "prompt": "presidentti sanoi",
+    "output_A": "presidentti sanoi viime vuonna <UNK> <UNK> jälkeen tammikuusta 2007 oli <UNK> prosenttia .",
+    "output_B": "presidentti sanoi nykyisen <UNK> ja <UNK> <UNK> <UNK> <UNK> turun yliopiston <UNK> tutkimuskeskuksesta toteavat .",
+    "model_A": "Baseline",
+    "model_B": "Label_Smoothing"
+  },
+  {
+    "id": 7,
+    "prompt": "poliisi on",
+    "output_A": "poliisi on käyttänyt <UNK> <UNK> eurooppaa <UNK> .",
+    "output_B": "poliisi on siirtynyt sosiaalisesta <UNK> <UNK> , hp:n <UNK> konsuli kesken , <UNK> ja <UNK> , joka ei <UNK> tai <UNK> ,",
+    "model_A": "Baseline",
+    "model_B": "Label_Smoothing"
+  },
+  {
+    "id": 8,
+    "prompt": "tutkijat ovat",
+    "output_A": "tutkijat ovat <UNK> yhteistyöhön , kaikki <UNK> <UNK> <UNK> .",
+    "output_B": "tutkijat ovat nopeasti <UNK> , joten <UNK> ehdokkaiden <UNK> ja <UNK> <UNK> <UNK> <UNK> .",
+    "model_A": "Baseline",
+    "model_B": "Label_Smoothing"
+  },
+  {
+    "id": 9,
+    "prompt": "tämä on",
+    "output_A": "tämä on ryhtynyt hyvin .",
+    "output_B": "tämä on tehnyt limittäin <UNK> <UNK> <UNK> .",
+    "model_A": "Baseline",
+    "model_B": "Label_Smoothing"
+  },
+  {
+    "id": 10,
+    "prompt": "siellä oli",
+    "output_A": "siellä oli vaikuttava vasta <UNK> , kun se syttyi suunnilleen <UNK> , kertoi latvala päivän lopulla .",
+    "output_B": "siellä oli aika <UNK> <UNK> .",
+    "model_A": "Baseline",
+    "model_B": "Label_Smoothing"
+  },
+  {
+    "id": 11,
+    "prompt": "nyt on",
+    "output_A": "nyt on hyvä hetki , että ei sitä ole ollut <UNK> ?",
+    "output_B": "nyt on <UNK> mukaan .",
+    "model_A": "Baseline",
+    "model_B": "Label_Smoothing"
+  },
+  {
+    "id": 12,
+    "prompt": "ensi vuonna",
+    "output_A": "ensi vuonna <UNK> <UNK> <UNK> helpottaa tiedonkeruuta ja <UNK> .",
+    "output_B": "ensi vuonna päätimme olla <UNK> valmistuksessa .",
+    "model_A": "Baseline",
+    "model_B": "Label_Smoothing"
+  },
+  {
+    "id": 13,
+    "prompt": "mutta hän",
+    "output_A": "mutta hän oli jättänyt <UNK> <UNK> <UNK> <UNK> <UNK> <UNK> <UNK> eli <UNK> kanssa .",
+    "output_B": "mutta hän käveli minut töihin .",
+    "model_A": "Baseline",
+    "model_B": "Label_Smoothing"
+  },
+  {
+    "id": 14,
+    "prompt": "koska se",
+    "output_A": "koska se ei välttämättä pääse <UNK> <UNK> , ja siihen sovelletaan sellaisenaan kaikissa jäsenvaltioissa .",
+    "output_B": "koska se ei <UNK> .",
+    "model_A": "Baseline",
+    "model_B": "Label_Smoothing"
+  },
+  {
+    "id": 15,
+    "prompt": "kun hän",
+    "output_A": "kun hän on <UNK> käsivartensa <UNK> tai <UNK> .",
+    "output_B": "kun hän itse minulle <UNK> , uni ja <UNK> .",
+    "model_A": "Baseline",
+    "model_B": "Label_Smoothing"
+  },
+  {
+    "id": 16,
+    "prompt": "jos me",
+    "output_A": "jos me olemme , on ihan tähän sanoa , oikeastaan se on tullut , että sitä ei ole hyvin <UNK> .",
+    "output_B": "jos me että minua on eri ajassa ku tää <UNK> .",
+    "model_A": "Baseline",
+    "model_B": "Label_Smoothing"
+  }
+]

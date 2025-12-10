@@ -1,0 +1,40 @@
+{
+  "config": {
+    "embed_dim": 256,
+    "hidden_dim": 256,
+    "num_layers": 2,
+    "dropout": 0.3,
+    "seq_length": 30,
+    "batch_size": 64,
+    "learning_rate": 0.001,
+    "epochs": 50,
+    "patience": 5,
+    "min_freq": 2
+  },
+  "finnish": {
+    "vocab_size": 14091,
+    "epochs_trained": 6,
+    "final_train_ppl": 21.15323574711653,
+    "best_dev_ppl": 75.63842368999188,
+    "test_ppl": 114.41963307287209
+  },
+  "hindi": {
+    "vocab_size": 9631,
+    "epochs_trained": 8,
+    "final_train_ppl": 18.526260627365044,
+    "best_dev_ppl": 65.88545198964378,
+    "test_ppl": 70.8715895428839
+  },
+  "ngram_baseline": {
+    "Finnish": {
+      "2-gram": 266.52,
+      "3-gram": 1257.93,
+      "4-gram": 3401.37
+    },
+    "Hindi": {
+      "2-gram": 192.36,
+      "3-gram": 861.14,
+      "4-gram": 2834.04
+    }
+  }
+}

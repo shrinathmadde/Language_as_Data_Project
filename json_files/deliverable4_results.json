@@ -1,0 +1,88 @@
+{
+  "finnish": {
+    "baseline": {
+      "test_ppl": 248.1221131781763,
+      "best_dev_ppl": 83.53325231177921,
+      "params": 8281355,
+      "epochs": 6
+    },
+    "bpe": {
+      "test_ppl": 246.14816359629094,
+      "best_dev_ppl": 209.4151008555664,
+      "params": 3617672,
+      "vocab_size": 5000,
+      "epochs": 7
+    },
+    "attention": {
+      "test_ppl": 548.9036268403494,
+      "best_dev_ppl": 150.48942192045902,
+      "params": 8545035,
+      "epochs": 6
+    },
+    "label_smoothing": {
+      "test_ppl": 102.58824171004156,
+      "best_dev_ppl": 164.5709157324915,
+      "params": 8281355,
+      "epochs": 6
+    }
+  },
+  "hindi": {
+    "baseline": {
+      "test_ppl": 118.78486024360146,
+      "best_dev_ppl": 75.45564426814745,
+      "params": 5993375,
+      "epochs": 6
+    },
+    "bpe": {
+      "test_ppl": 106.86815811675305,
+      "best_dev_ppl": 92.63195638351432,
+      "params": 3617672,
+      "vocab_size": 5000,
+      "epochs": 7
+    },
+    "attention": {
+      "test_ppl": 136.17501463348214,
+      "best_dev_ppl": 86.72113899475042,
+      "params": 6257055,
+      "epochs": 6
+    },
+    "label_smoothing": {
+      "test_ppl": 66.61893756635452,
+      "best_dev_ppl": 143.12779106671124,
+      "params": 5993375,
+      "epochs": 7
+    }
+  },
+  "finnish_sampling": {
+    "hän on": {
+      "greedy": "hän on <UNK> <UNK> <UNK> , <UNK> <UNK> ja <UNK> <UNK> <UNK> .",
+      "temp_0.7": "hän on toiminut professorina <UNK> perustamista sijaitsevasta <UNK> <UNK> <UNK> <UNK> .",
+      "temp_1.5": "hän on kaksi lisää melkein <UNK> <UNK> .",
+      "top_k": "hän on julkaissut the eraser <UNK> , <UNK> <UNK> , joka oli keskittynyt <UNK> ja <UNK> .",
+      "top_p": "hän on näytellyt <UNK> sdp:n tukemiseen ."
+    },
+    "se oli": {
+      "greedy": "se oli <UNK> <UNK> , mutta <UNK> <UNK> <UNK> <UNK> <UNK> <UNK> <UNK> <UNK> .",
+      "temp_0.7": "se oli 1800-luvun <UNK> .",
+      "temp_1.5": "se oli kuulemma pitkä vaikeaa hän ei vähän kello .",
+      "top_k": "se oli veljeni , mutta <UNK> työllähän siitäkin selvitään , jotka on myös <UNK> <UNK> ohjeet .",
+      "top_p": "se oli paljon <UNK> , mutta <UNK> olen varma , että otin <UNK> hänen <UNK> <UNK> <UNK> , kunnes päätettiin mielessä , että kuningatar <UNK> rakennetaan <UNK> <UNK> , missä tuli hieman"
+    }
+  },
+  "hindi_sampling": {
+    "वह है": {
+      "greedy": "वह है कि इस तरह की प्रताड़ना से पहले ही इस मुद्दे पर बातचीत करेंगे ।",
+      "temp_0.7": "वह है , इसलिए उन्होंने खुद को असहज नहीं ली ।",
+      "temp_1.5": "वह है ।",
+      "top_k": "वह है कि वह युद्धक <UNK> में <UNK> और <UNK> का भूजा चाहिए ।",
+      "top_p": "वह है कि यह मुलाक़ात अपने निजी क्षेत्र के अनुरूप हो जा रहा है ।"
+    },
+    "यह एक": {
+      "greedy": "यह एक अनूठा संग्रहालय है ।",
+      "temp_0.7": "यह एक अन्य अधिकारी को गिरफ्तार किया गया है ।",
+      "temp_1.5": "यह एक क्षेत्रीय रजिस्टर माना गया है ।",
+      "top_k": "यह एक ऐतिहासिक <UNK> है ।",
+      "top_p": "यह एक नया और अध्ययन है , लेकिन यदि , मेहर और ट्रेन में ऐसी चमक की वजह से कोई ज्यादा नहीं है ।"
+    }
+  }
+}

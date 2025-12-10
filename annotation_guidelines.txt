@@ -1,0 +1,89 @@
+
+================================================================================
+ANNOTATION GUIDELINES FOR LANGUAGE MODEL EVALUATION
+================================================================================
+
+TASK: Evaluate generated text continuations from two language models (A and B).
+
+--------------------------------------------------------------------------------
+CATEGORY 1: SYNTACTIC FLUENCY (1-5 scale)
+--------------------------------------------------------------------------------
+Evaluate whether the generated text follows grammatical rules of the language.
+
+Score | Description
+------|---------------------------------------------------------------------------
+  1   | Completely ungrammatical; random word sequences; incomprehensible
+  2   | Mostly ungrammatical; major errors in word order, agreement, or case
+  3   | Some grammatical errors but structure is recognizable
+  4   | Minor grammatical errors; mostly well-formed sentences
+  5   | Fully grammatical; native-like sentence structure
+
+Examples (Hindi):
+- Score 5: "प्रधानमंत्री ने कहा कि सरकार इस मुद्दे पर विचार करेगी।"
+- Score 3: "प्रधानमंत्री कहा है कि सरकार मुद्दे विचार।"
+- Score 1: "प्रधानमंत्री है कहा ने सरकार इस।"
+
+Examples (Finnish):
+- Score 5: "Hän on ollut professorina yliopistossa viisi vuotta."
+- Score 3: "Hän on ollut professori yliopisto viisi vuotta."
+- Score 1: "Hän professori ollut on yliopisto."
+
+--------------------------------------------------------------------------------
+CATEGORY 2: SEMANTIC COHERENCE (1-5 scale)
+--------------------------------------------------------------------------------
+Evaluate whether the text makes sense and maintains a logical topic/theme.
+
+Score | Description
+------|---------------------------------------------------------------------------
+  1   | Completely incoherent; no logical connection between words
+  2   | Mostly incoherent; topic shifts randomly; contradictory statements
+  3   | Partially coherent; some logical flow but with confusing parts
+  4   | Mostly coherent; clear topic with minor inconsistencies
+  5   | Fully coherent; logical flow; meaningful content that follows from prompt
+
+Examples (Hindi):
+- Score 5: "यह एक ऐतिहासिक इमारत है जो मुगल काल में बनाई गई थी।"
+- Score 3: "यह एक ऐतिहासिक इमारत है जो खाना बनाती है।"
+- Score 1: "यह एक ऐतिहासिक नीला चलना पानी कल।"
+
+Examples (Finnish):
+- Score 5: "Tämä on vanha rakennus, joka rakennettiin 1800-luvulla."
+- Score 3: "Tämä on vanha rakennus, joka syö kalaa."
+- Score 1: "Tämä on vanha sininen juosta vesi huomenna."
+
+--------------------------------------------------------------------------------
+CATEGORY 3: OVERALL PREFERENCE (A/B/Tie)
+--------------------------------------------------------------------------------
+Which output would you prefer to read? Consider both fluency and coherence.
+
+- A: Output A is clearly better
+- B: Output B is clearly better
+- Tie: Both outputs are roughly equal in quality
+
+--------------------------------------------------------------------------------
+HANDLING <UNK> TOKENS
+--------------------------------------------------------------------------------
+- <UNK> (unknown word) tokens indicate words not in vocabulary
+- Many <UNK> tokens should lower both fluency AND coherence scores
+- A sentence with 50%+ <UNK> tokens: maximum score of 2 for both categories
+
+--------------------------------------------------------------------------------
+ANNOTATION PROCESS
+--------------------------------------------------------------------------------
+1. Read the prompt to understand the expected continuation context
+2. Read Output A - score fluency (1-5), then coherence (1-5)
+3. Read Output B - score fluency (1-5), then coherence (1-5)
+4. Decide overall preference (A/B/Tie)
+5. Add notes for unusual cases or observations
+
+--------------------------------------------------------------------------------
+FOR NON-NATIVE SPEAKERS
+--------------------------------------------------------------------------------
+If you don't speak the target language:
+1. Use Google Translate to get rough English translations
+2. Check grammar using online tools (e.g., LanguageTool)
+3. Focus on structural patterns you can identify
+4. Mark uncertain ratings with "?" in notes column
+5. Document your translation/verification process
+
+================================================================================
