@@ -1,0 +1,47 @@
+{
+  "files_used": [
+    "A_annotation_sheet_Finnish.csv",
+    "B_annotation_sheet_Finnish.csv",
+    "C_annotation_sheet_Finnish.csv"
+  ],
+  "agreement": {
+    "fluency_A": {
+      "kappa_12": 0.30097087378640774,
+      "kappa_13": 0.4514285714285714,
+      "kappa_23": 0.22705314009661837,
+      "avg_kappa": 0.32648419510386584,
+      "alpha": 0.6398467432950192
+    },
+    "fluency_B": {
+      "kappa_12": 0.2,
+      "kappa_13": 0.48663101604278075,
+      "kappa_23": -0.013574660633484163,
+      "avg_kappa": 0.22435211846976555,
+      "alpha": 0.4581310679611651
+    },
+    "coherence_A": {
+      "kappa_12": 0.0,
+      "kappa_13": 0.05263157894736842,
+      "kappa_23": 0.07964601769911504,
+      "avg_kappa": 0.044092532215494494,
+      "alpha": 0.17362637362637368
+    },
+    "coherence_B": {
+      "kappa_12": 0.018867924528301886,
+      "kappa_13": -0.0196078431372549,
+      "kappa_23": -0.13131313131313133,
+      "avg_kappa": -0.044017683307361444,
+      "alpha": 0.13192612137203175
+    },
+    "preference": {
+      "kappa_12": 0.26857142857142857,
+      "kappa_13": 0.5328467153284672,
+      "kappa_23": 0.21739130434782608
+    }
+  },
+  "results": {
+    "winner": "Model A (Baseline)",
+    "pref_a": 24,
+    "pref_b": 16
+  }
+}
